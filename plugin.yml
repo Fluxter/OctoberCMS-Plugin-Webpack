@@ -1,0 +1,6 @@
+plugin:
+    name: 'fluxter.plugin-webpack::lang.plugin.name'
+    description: 'fluxter.plugin-webpack::lang.plugin.description'
+    author: Fluxter
+    icon: oc-icon-connectdevelop
+    homepage: 'https://fluxter.net'
