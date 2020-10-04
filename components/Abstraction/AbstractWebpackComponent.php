@@ -6,8 +6,9 @@ use Cms\Classes\ComponentBase;
 
 abstract class AbstractWebpackComponent extends ComponentBase
 {
-    protected function getEntrypoints(string $theme)
+    protected function loadEntrypoints()
     {
+        $theme = $this->page->page->getThemeAttribute()->getDirName();
         return json_decode(file_get_contents(__DIR__ . "/../../../../../themes/" . $theme . "/" . $this->property('entrypointsFile')), true);
     }
 
@@ -33,7 +34,7 @@ abstract class AbstractWebpackComponent extends ComponentBase
 
     public function onRender()
     {
-        $webpack = $this->getEntrypoints("theme-fx2020");
+        $webpack = $this->loadEntrypoints();
         $rows = $this->getRows($webpack["entrypoints"][$this->property('webpackEntrypoint')]);
         $html = "";
         foreach ($rows as $row) {
