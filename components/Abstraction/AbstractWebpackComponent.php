@@ -8,17 +8,23 @@ abstract class AbstractWebpackComponent extends ComponentBase
 {
     protected function getEntrypoints(string $theme)
     {
-        return json_decode(file_get_contents(__DIR__ . "/../../../../../themes/" . $theme . "/assets/build/entrypoints.json"), true);
+        return json_decode(file_get_contents(__DIR__ . "/../../../../../themes/" . $theme . "/" . $this->property('entrypointsFile')), true);
     }
 
     public function defineProperties()
     {
         return [
             'webpackEntrypoint' => [
-                'title'       => 'fluxter.webpack::lang.settings.posts_filter',
-                'description' => 'fluxter.webpack::lang.settings.posts_filter_description',
+                'title'       => 'fluxter.webpack::lang.settings.entrypoint',
+                'description' => 'fluxter.webpack::lang.settings.entrypoint_description',
                 'type'        => 'string',
                 'default'     => 'app',
+            ],
+            'entrypointsFile' => [
+                'title'       => 'fluxter.webpack::lang.settings.entrypointFile',
+                'description' => 'fluxter.webpack::lang.settings.entrypointFile_description',
+                'type'        => 'string',
+                'default'     => 'assets/build/entrypoints.json',
             ],
         ];
     }
