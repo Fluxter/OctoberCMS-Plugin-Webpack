@@ -2,41 +2,26 @@
 
 namespace Fluxter\Webpack;
 
+use Fluxter\OctoberCMS\Plugin\Webpack\Components\WebpackScripts;
+use Fluxter\OctoberCMS\Plugin\Webpack\Components\WebpackStyles;
 use System\Classes\PluginBase;
 
 class Plugin extends PluginBase
 {
-    public function registerMarkupTags()
+    public function pluginDetails()
     {
         return [
-            "functions" => [
-                "webpack_scripts" => [$this, "webpackScripts"],
-                "webpack_styles" => [$this, "webpackStyles"]
-            ]
+            "name" => "Webpack",
+            "description" => "loads webpack styles and scripts for your theme.",
+            "author" => "Marcel Kallen, Fluxter",
         ];
     }
 
-    private function getEntrypoints(string $theme)
+    public function registerComponents()
     {
-        return json_decode(file_get_contents(__DIR__ . "/../../../themes/" . $theme . "/assets/build/entrypoints.json"), true);
-    }
-
-    public function webpackStyles(string $entrypoint)
-    {
-        $ep = $this->getEntrypoints("theme-fx2020");
-        foreach ($ep["entrypoints"][$entrypoint]["css"] as $path) {
-            $html = '<link rel="stylesheet" type="text/css" href="' . $path . '" />';
-        }
-        return $html;
-    }
-
-    public function webpackScripts(string $entrypoint)
-    {
-        $ep = $this->getEntrypoints("theme-fx2020");
-        $html = "";
-        foreach ($ep["entrypoints"][$entrypoint]["js"] as $path) {
-            $html = '<script src="' . $path . '" />';
-        }
-        return $html;
+        return [
+            WebpackStyles::class => "webpackStyles",
+            WebpackScripts::class => "webpackScripts"
+        ];
     }
 }
