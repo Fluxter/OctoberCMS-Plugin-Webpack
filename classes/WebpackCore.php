@@ -2,21 +2,18 @@
 
 namespace Fluxter\OctoberCMS\Plugin\Webpack\Classes;
 
-use Cms\Classes\Page;
+use Cms\Classes\Theme;
 
 class WebpackCore
 {
-    private Page $page;
-
-    public function __construct(Page $page)
+    public function __construct()
     {
-        $this->page = $page;
+        $this->themeDir = Theme::getActiveTheme()->getDirName();
     }
 
     protected function loadEntrypoints(string $entrypointFile)
     {
-        $theme = $this->page->getThemeAttribute()->getDirName();
-        return json_decode(file_get_contents(__DIR__ . "/../../../../themes/" . $theme . "/" . $entrypointFile), true);
+        return json_decode(file_get_contents(__DIR__ . "/../../../../themes/" . $this->themeDir . "/" . $entrypointFile), true);
     }
 
     public function renderTags(string $entrypoint, string $type, string $entrypointFile = "asets/build/entrypoints.json")
@@ -26,7 +23,7 @@ class WebpackCore
         $rows = "";
         foreach ($webpack["entrypoints"][$entrypoint][$type] as $path) {
             if ($type == "js") {
-                $rows .= '<script src="' . $path . '" />';
+                $rows .= '<script src="' . $path . '"></script>';
             } elseif ($type == "css") {
                 $rows .= '<link rel="stylesheet" type="text/css" href="' . $path . '" />';
             } else {

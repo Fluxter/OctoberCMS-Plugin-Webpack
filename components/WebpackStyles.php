@@ -17,7 +17,7 @@ class WebpackStyles extends AbstractWebpackComponent
 
     public function onRender()
     {
-        $webpackCore = new WebpackCore($this->page->page);
+        $webpackCore = new WebpackCore();
         return $webpackCore->renderTags($this->property('entrypoint'), "css", $this->property("entrypointsFile"));
     }
 }
