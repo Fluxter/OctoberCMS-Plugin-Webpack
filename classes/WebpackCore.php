@@ -27,7 +27,5 @@ class WebpackCore
             }
         }
         return $rows;
-
-        $rows = $this->getRows($webpack["entrypoints"][$this->property('webpackEntrypoint')]);
     }
 }
