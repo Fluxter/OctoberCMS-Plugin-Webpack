@@ -15,7 +15,11 @@
 Use the following minimal skeleton or adapt it
 ```html
 [webpackStyles]
+entrypointsFile = "assets/build/entrypoints.json" // Default
+entrypoint = "app" // Default
 [webpackScripts]
+entrypointsFile = "assets/build/entrypoints.json" // Default
+entrypoint = "app" // Default
 ==
 <!DOCTYPE html>
 <html>

@@ -10,7 +10,7 @@ abstract class AbstractWebpackComponent extends ComponentBase
     public function defineProperties()
     {
         return [
-            'webpackEntrypoint' => [
+            'entrypoint' => [
                 'title'       => 'fluxter.webpack::lang.settings.entrypoint',
                 'description' => 'fluxter.webpack::lang.settings.entrypoint_description',
                 'type'        => 'string',

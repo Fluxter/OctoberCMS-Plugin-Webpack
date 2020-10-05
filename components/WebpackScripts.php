@@ -18,6 +18,6 @@ class WebpackScripts extends AbstractWebpackComponent
     public function onRender()
     {
         $webpackCore = new WebpackCore();
-        return $webpackCore->renderTags($this->page->page, $this->property('webpackEntrypoint'), "js", $this->property("entrypointsFile"));
+        return $webpackCore->renderTags($this->page->page, $this->property('entrypoint'), "js", $this->property("entrypointsFile"));
     }
 }
