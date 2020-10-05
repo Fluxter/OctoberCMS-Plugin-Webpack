@@ -1,7 +1,8 @@
 {
     "autoload": {
         "psr-4": {
-            "Fluxter\\OctoberCMS\\Plugin\\Webpack\\Components\\": "./components"
+            "Fluxter\\OctoberCMS\\Plugin\\Webpack\\Components\\": "./components",
+            "Fluxter\\OctoberCMS\\Plugin\\Webpack\\Classes\\": "./classes"
         }
     }
 }

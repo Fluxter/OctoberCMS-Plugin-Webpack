@@ -2,6 +2,7 @@
 
 namespace Fluxter\OctoberCMS\Plugin\Webpack\Components;
 
+use Fluxter\OctoberCMS\Plugin\Webpack\Classes\WebpackCore;
 use Fluxter\OctoberCMS\Plugin\Webpack\Components\Abstraction\AbstractWebpackComponent;
 
 class WebpackStyles extends AbstractWebpackComponent
@@ -14,12 +15,9 @@ class WebpackStyles extends AbstractWebpackComponent
         ];
     }
 
-    protected function getRows(array $entryPoint): array
+    public function onRender()
     {
-        $rows = [];
-        foreach ($entryPoint["css"] as $path) {
-            $rows[] = '<link rel="stylesheet" type="text/css" href="' . $path . '" />';
-        }
-        return $rows;
+        $webpackCore = new WebpackCore();
+        return $webpackCore->renderTags($this->page->page, $this->property('webpackEntrypoint'), "css", $this->property("entrypointsFile"));
     }
 }

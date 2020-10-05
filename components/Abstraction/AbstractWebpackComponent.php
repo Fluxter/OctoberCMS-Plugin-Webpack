@@ -6,11 +6,6 @@ use Cms\Classes\ComponentBase;
 
 abstract class AbstractWebpackComponent extends ComponentBase
 {
-    protected function loadEntrypoints()
-    {
-        $theme = $this->page->page->getThemeAttribute()->getDirName();
-        return json_decode(file_get_contents(__DIR__ . "/../../../../../themes/" . $theme . "/" . $this->property('entrypointsFile')), true);
-    }
 
     public function defineProperties()
     {
@@ -28,18 +23,5 @@ abstract class AbstractWebpackComponent extends ComponentBase
                 'default'     => 'assets/build/entrypoints.json',
             ],
         ];
-    }
-
-    abstract protected function getRows(array $entryPoint): array;
-
-    public function onRender()
-    {
-        $webpack = $this->loadEntrypoints();
-        $rows = $this->getRows($webpack["entrypoints"][$this->property('webpackEntrypoint')]);
-        $html = "";
-        foreach ($rows as $row) {
-            $html .= $row;
-        }
-        return $html;
     }
 }

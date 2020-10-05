@@ -2,6 +2,7 @@
 
 namespace Fluxter\OctoberCMS\Plugin\Webpack\Components;
 
+use Fluxter\OctoberCMS\Plugin\Webpack\Classes\WebpackCore;
 use Fluxter\OctoberCMS\Plugin\Webpack\Components\Abstraction\AbstractWebpackComponent;
 
 class WebpackScripts extends AbstractWebpackComponent
@@ -14,12 +15,9 @@ class WebpackScripts extends AbstractWebpackComponent
         ];
     }
 
-    protected function getRows(array $entryPoint): array
+    public function onRender()
     {
-        $rows = [];
-        foreach ($entryPoint["js"] as $path) {
-            $rows[] = '<script src="' . $path . '" />';
-        }
-        return $rows;
+        $webpackCore = new WebpackCore();
+        return $webpackCore->renderTags($this->page->page, $this->property('webpackEntrypoint'), "js", $this->property("entrypointsFile"));
     }
 }

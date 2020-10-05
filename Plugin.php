@@ -2,6 +2,7 @@
 
 namespace Fluxter\Webpack;
 
+use Fluxter\OctoberCMS\Plugin\Webpack\Classes\WebpackCore;
 use Fluxter\OctoberCMS\Plugin\Webpack\Components\WebpackScripts;
 use Fluxter\OctoberCMS\Plugin\Webpack\Components\WebpackStyles;
 use System\Classes\PluginBase;
@@ -16,6 +17,22 @@ class Plugin extends PluginBase
             "author" => "Marcel Kallen, Fluxter",
         ];
     }
+
+    // public function registerMarkupTags()
+    // {
+    //     return [
+    //         "functions" => [
+    //             "webpack_styles" => [$this, "webpackStyles"]
+    //         ]
+    //     ];
+    // }
+
+    // public function webpackStyles(string $type, string $entryPoint = "app")
+    // {
+    //     $webpack = new WebpackCore();
+        
+    //     return "Hello world";
+    // }
 
     public function registerComponents()
     {
