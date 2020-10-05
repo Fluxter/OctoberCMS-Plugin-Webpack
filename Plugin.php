@@ -17,22 +17,21 @@ class Plugin extends PluginBase
             "author" => "Marcel Kallen, Fluxter",
         ];
     }
+    
+    public function registerMarkupTags()
+    {
+        return [
+            "functions" => [
+                "webpack_styles" => [$this, "webpackStyles"]
+            ]
+        ];
+    }
 
-    // public function registerMarkupTags()
-    // {
-    //     return [
-    //         "functions" => [
-    //             "webpack_styles" => [$this, "webpackStyles"]
-    //         ]
-    //     ];
-    // }
-
-    // public function webpackStyles(string $type, string $entryPoint = "app")
-    // {
-    //     $webpack = new WebpackCore();
-        
-    //     return "Hello world";
-    // }
+    public function webpackStyles(string $entrypoint = "app")
+    {
+        $webpack = new WebpackCore($this->getP);
+        return "Hello world";
+    }
 
     public function registerComponents()
     {

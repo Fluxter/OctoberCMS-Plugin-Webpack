@@ -6,15 +6,22 @@ use Cms\Classes\Page;
 
 class WebpackCore
 {
-    protected function loadEntrypoints(Page $page, string $entrypointFile)
+    private Page $page;
+
+    public function __construct(Page $page)
     {
-        $theme = $page->getThemeAttribute()->getDirName();
+        $this->page = $page;
+    }
+
+    protected function loadEntrypoints(string $entrypointFile)
+    {
+        $theme = $this->page->getThemeAttribute()->getDirName();
         return json_decode(file_get_contents(__DIR__ . "/../../../../themes/" . $theme . "/" . $entrypointFile), true);
     }
 
-    public function renderTags(Page $page, string $entrypoint, string $type, string $entrypointFile = "asets/build/entrypoints.json")
+    public function renderTags(string $entrypoint, string $type, string $entrypointFile = "asets/build/entrypoints.json")
     {
-        $webpack = $this->loadEntrypoints($page, $entrypointFile);
+        $webpack = $this->loadEntrypoints($entrypointFile);
         
         $rows = "";
         foreach ($webpack["entrypoints"][$entrypoint][$type] as $path) {
