@@ -1,1 +1,2 @@
 1.0.0: Initial release
+1.1.0: Added documentation and webpack_scripts() + webpack_styles() twig functions
